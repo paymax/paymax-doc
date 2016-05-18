@@ -36,7 +36,7 @@ sign: {填入签名结果}
 支付订单相关的要素通过Charge对象来承载。
 
 
-Charge对象结构：
+**Charge对象结构：**
 
 |参数 |类型 |描述|
 |:---|----|-----|
@@ -48,7 +48,7 @@ Charge对象结构：
 |channel|String|支付渠道编码，唯一标识一个支付渠道，参考[支付渠道编码](#支付渠道编码)|
 |client_ip| String |发起支付的客户端IP|
 |description| String |订单备注，限制300个字符内|
-|extra|Map|特定渠道需要的的额外附加参数|
+|extra|Map|特定渠道需要的的额外附加参数，参考[支付渠道附加参数](#支付渠道附加参数)|
 |transaction_no| String |支付渠道订单号|
 |metadata|Map|用户自定义元数据|
 |app|String|应用的appKey|
@@ -125,6 +125,8 @@ Charge对象
 
 退款订单相关的要素通过Refund对象来承载。
 
+**Refund对象结构：**
+
 |参数 |类型 |描述|
 |:---|----|-----|
 |id|String|退款订单id，系统内唯一，以“re_”开头，后跟24位随机数|
@@ -183,7 +185,6 @@ sign: {sign}
 Refund对象
 
 
-
 ## 支付渠道编码
 
 |渠道|编码|
@@ -193,3 +194,17 @@ Refund对象
 |Apple Pay| apple_pay_app|
 |微信公众号| wechat_wap|
 |支付宝即时到账| alipay_web|
+|拉卡拉PC端支付| lakala_web|
+|拉卡拉移动SDK支付| lakala_app|
+
+## 支付渠道附加参数
+
+|渠道|附加参数|示例|
+|:---|:---|:---|
+|支付宝移动支付| 无||
+|微信移动支付| 无||
+|Apple Pay| 无||
+|微信公众号| 无||
+|支付宝即时到账| 无|
+|拉卡拉PC端支付| user_id: 必填，用户在商户系统中的唯一标识；| {"user_id":"aaa111"} |
+|拉卡拉移动SDK支付| user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址；|{"user_id":"aaa111","return_url":"http://www.abc.cn/"} |
