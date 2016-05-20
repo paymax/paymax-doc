@@ -1,10 +1,8 @@
-## PayRight Android SDK 使用文档
+## Paymax Android SDK 使用文档
 
 ### 一、下载
 
-Android SDK下载地址：https://github.com/swwx-payright/payright-doc/tree/master/sdk
-
-下载Android SDK，下载列表如下包含：
+在 http://www.paymax.cn 下载Android SDK，下载列表如下包含：
 
 ![下载列表](https://raw.githubusercontent.com/coderbook/MarkDownRes/master/PayRightPic/payright_sdk_android_dir.png)
 
@@ -12,31 +10,31 @@ Android SDK下载地址：https://github.com/swwx-payright/payright-doc/tree/mas
 
 ### 二、快速体验
 
-PayRight SDK 为开发者提供了demo 程序，可以快速体验 PayRight 接入流程。下载 PayRight SDK 之后将整个目录导入到您的 Android Studio 中。
+Paymax SDK 为开发者提供了demo 程序，可以快速体验 Paymax 接入流程。下载 Paymax SDK 之后将整个目录导入到您的 Android Studio 中。
 
-使用 Android Studio 时，请选择 `File` → `Open...`→ `PayRightDemo` 
+使用 Android Studio 时，请选择 `File` → `Open...`→ `PaymaxDemo` 
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/coderbook/MarkDownRes/master/PayRightPic/payright_sdk_android_files.png" width = "400" height = "400" alt="图片名称" align=center />
-</div>
+<div>
 
 
 
 ### 三、快速集成
 
-#### 导入 PayRight SDK
+#### 导入 Paymax SDK
 
 ##### Android Studio
 
 1. 在你的项目里创建 `libs` 目录:将项目切换到project模式，定位到你的module，右击 `New` → `Directory`→ 输入 `libs`→ `OK` 
-2. 将下载的  `payRightSDK.jar` 复制、粘贴到 `libs` 目录
+2. 将下载的  `paymax.jar` 复制、粘贴到 `libs` 目录
 3. 同时将下载的微信 `libammsdk.jar` 、支付宝 `alipaySdk-20160223` 官方jar文件复制、粘贴到 `libs` 目录
 4. 找到module的 `build.gradle` → `dependencies` 填写
   
    
          compile fileTree(dir: 'libs', include: ['*.jar'])  
 
-
+5. 如果使用拉卡拉支付, 找到lkl-pay-sdk目录, 复制到你的android studio工程目录中, 并在settings.gradle文件中添加 "include ':lkl-pay-sdk'", 然后在app的`build.gradle` → `dependencies` 添加 "compile project(':lkl-pay-sdk')"
 
 
 ##### 权限声明
@@ -60,14 +58,14 @@ PayRight SDK 为开发者提供了demo 程序，可以快速体验 PayRight 接�
 
      <!-- 注册微信 -->
        <activity
-            android:name="com.swwx.payright.PaymentActivity"
+            android:name="com.swwx.paymax.PaymentActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
        <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:targetActivity="com.suwx.payright.PaymentActivity" />
+            android:targetActivity="com.swwx.paymax.PaymentActivity" />
 
      <!-- 注册支付宝 -->
         <activity
@@ -81,7 +79,7 @@ PayRight SDK 为开发者提供了demo 程序，可以快速体验 PayRight 接�
 
 
 ### 四、获得 Charge
-Charge 对象是一个包含支付信息的 JSON 对象，是 `PayRight SDK` 发起支付的必要参数。该参数需要请求用户服务器获得，服务端生成 charge 的方式参考 [PayRight 官方文档]。SDK 中的 demo 里面提供了如何获取 charge 的实例方法，供用户参考。
+Charge 对象是一个包含支付信息的 JSON 对象，是 `Paymax SDK` 发起支付的必要参数。该参数需要请求用户服务器获得，服务端生成 charge 的方式参考 [Paymax 官方文档]。SDK 中的 demo 里面提供了如何获取 charge 的实例方法，供用户参考。
 
 ### 五、发起支付
  
@@ -93,11 +91,11 @@ Charge 对象是一个包含支付信息的 JSON 对象，是 `PayRight SDK` 发
      * @param callback  充值结果回调接口
      */
 
-    PayRightSDK.pay(Activity activity, String charge, PayRightCallback callback);
+    PaymaxSDK.pay(Activity activity, String charge, PaymaxCallback callback);
 
     
 #### 六、获取支付状态
-从 `PayRightCallback` 的 `onPayFinished()` 方法中获得支付结果。支付成功后，用户服务器也会收到PayRight 服务器发送的异步通知。 最终支付成功请根据服务端异步通知为准。
+从 `PaymaxCallback` 的 `onPayFinished()` 方法中获得支付结果。支付成功后，用户服务器也会收到Paymax 服务器发送的异步通知。 最终支付成功请根据服务端异步通知为准。
 
 
 
@@ -105,47 +103,47 @@ Charge 对象是一个包含支付信息的 JSON 对象，是 `PayRight SDK` 发
      public void onPayFinished(PayResult result) {
         String msg = "Unknow";
         switch (result.getCode()) {
-            case PayRight.CODE_SUCCESS:
+            case Paymax.CODE_SUCCESS:
                 //支付成功
                 msg = "Complete, Success!";
                 break;
 
-            case PayRight.CODE_ERROR_CHARGE_JSON:
+            case Paymax.CODE_ERROR_CHARGE_JSON:
                 //非空格式
                 msg = "charge string isn't a json string error.";
                 break;
 
-            case PayRight.CODE_FAIL_CANCEL:
+            case Paymax.CODE_FAIL_CANCEL:
                 //用户取消
                 msg = "cancel pay.";
                 break;
 
-            case PayRight.CODE_ERROR_CHARGE_PARAMETER:
+            case Paymax.CODE_ERROR_CHARGE_PARAMETER:
                 //字段不全
                 msg = "some charge paramters error.";
                 break;
 
-            case PayRight.CODE_ERROR_WX_NOT_INSTALL:
+            case Paymax.CODE_ERROR_WX_NOT_INSTALL:
                 //微信未安装
                 msg = "wx not install.";
                 break;
 
-            case PayRight.CODE_ERROR_WX_NOT_SUPPORT_PAY:
+            case Paymax.CODE_ERROR_WX_NOT_SUPPORT_PAY:
                 //微信版本不支持
                 msg = "ex not support pay.";
                 break;
 
-            case PayRight.CODE_ERROR_WX_UNKNOW:
+            case Paymax.CODE_ERROR_WX_UNKNOW:
                 //微信未知错误
                 msg = "wechat failed.";
                 break;
 
-            case PayRight.CODE_ERROR_ALI_DEAL:
+            case Paymax.CODE_ERROR_ALI_DEAL:
                 //支付宝正在处理中
                 msg = "alipay dealing.";
                 break;
 
-            case PayRight.CODE_ERROR_CONNECT:
+            case Paymax.CODE_ERROR_CONNECT:
                 //支付宝网络连接错误
                 msg = "alipay network connection failed.";
                 break;
@@ -159,7 +157,7 @@ Android 不允许在 UI 线程中进行网络请求，所以请求 charge 对象
     
     
 ### 混淆设置
-用户进行 apk 混淆打包的时候，为了不影响 PayRight SDK 以及渠道 SDK 的使用，请在 proguard-rules 中添加一下混淆规则。
+用户进行 apk 混淆打包的时候，为了不影响 Paymax SDK 以及渠道 SDK 的使用，请在 proguard-rules 中添加一下混淆规则。
 
 
 
@@ -169,15 +167,17 @@ Android 不允许在 UI 线程中进行网络请求，所以请求 charge 对象
     -dontwarn  com.tencent.**
     -keep class com.tencent.** {*;}
 
-    -dontwarn com.swwx.payright.**
-    -keep class com.swwx.payright.** {*;}
+    -dontwarn com.swwx.paymax.**
+    -keep class com.swwx.paymax.** {*;}
 
+    -dontwarn com.lkl.**
+    -keep class com.lkl.** {*;}
 
 
 ### 日志开关
 
 SDK 提供了日志功能，默认日志为关闭状态。
-开发者可以通过下面设置打开日志开关。通过 `PayRight` 来对日志进行筛选。
+开发者可以通过下面设置打开日志开关。通过 `PaymaxSDK` 来对日志进行筛选。
 
     PayLog.DEBUG = true;
 
