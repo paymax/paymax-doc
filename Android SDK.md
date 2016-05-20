@@ -2,7 +2,7 @@
 
 ### 一、下载
 
-在 http://www.paymax.cn 下载Android SDK，下载列表如下包含：
+在 http://www.paymax.cc 下载Android SDK，下载列表如下包含：
 
 ![下载列表](https://raw.githubusercontent.com/coderbook/MarkDownRes/master/PayRightPic/payright_sdk_android_dir.png)
 
@@ -16,7 +16,7 @@ Paymax SDK 为开发者提供了demo 程序，可以快速体验 Paymax 接入�
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/coderbook/MarkDownRes/master/PayRightPic/payright_sdk_android_files.png" width = "400" height = "400" alt="图片名称" align=center />
-<div>
+</div>
 
 
 
