@@ -23,8 +23,8 @@
 需要将请求体以UTF-8编码转换成字节数组，然后使用商户私钥对其签名，签名算法为SHA1WithRSA。并将签名结果和Secret Key分别放入HTTP请求的Header中，例如：
 
 ```http
-POST /charges HTTP/1.1
-Host: https://paymax.cc/api
+POST /v1/charges HTTP/1.1
+Host: https://paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {填入Secret Key}
 sign: {填入签名结果}
@@ -75,8 +75,8 @@ sign: {填入签名结果}
 
 
 ```http
-POST /charges HTTP/1.1
-Host: https://paymax.cc/api
+POST /v1/charges HTTP/1.1
+Host: https://paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
@@ -109,8 +109,8 @@ Charge对象
 ### 查询支付
 
 ```http
-GET /charges/{CHARGE_ID} HTTP/1.1
-Host: https://paymax.cc/api
+GET /v1/charges/{CHARGE_ID} HTTP/1.1
+Host: https://paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
@@ -149,8 +149,8 @@ Charge对象
 使用HTTP协议调用退款接口发起请求：
 
 ```http
-POST /charges/{CHARGE_ID}/refunds HTTP/1.1
-Host: https://paymax.cc/api
+POST /v1/charges/{CHARGE_ID}/refunds HTTP/1.1
+Host: https://paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
@@ -171,8 +171,8 @@ Refund对象
 ### 查询退款
 
 ```http
-GET /charges/{CHARGE_ID}/refunds/{REFUND_ID} HTTP/1.1
-Host: https://paymax.cc/api
+GET /v1/charges/{CHARGE_ID}/refunds/{REFUND_ID} HTTP/1.1
+Host: https://paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
