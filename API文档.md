@@ -24,7 +24,7 @@
 
 ```http
 POST /v1/charges HTTP/1.1
-Host: https://paymax.cc/merchant-api
+Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {填入Secret Key}
 sign: {填入签名结果}
@@ -76,7 +76,7 @@ sign: {填入签名结果}
 
 ```http
 POST /v1/charges HTTP/1.1
-Host: https://paymax.cc/merchant-api
+Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
@@ -110,7 +110,7 @@ Charge对象
 
 ```http
 GET /v1/charges/{CHARGE_ID} HTTP/1.1
-Host: https://paymax.cc/merchant-api
+Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
@@ -150,7 +150,7 @@ Charge对象
 
 ```http
 POST /v1/charges/{CHARGE_ID}/refunds HTTP/1.1
-Host: https://paymax.cc/merchant-api
+Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
@@ -172,7 +172,7 @@ Refund对象
 
 ```http
 GET /v1/charges/{CHARGE_ID}/refunds/{REFUND_ID} HTTP/1.1
-Host: https://paymax.cc/merchant-api
+Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
 Authorization: {SECRET_KEY}
 sign: {sign}
