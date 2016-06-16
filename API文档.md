@@ -186,15 +186,16 @@ Refund对象
 
 ## 支付渠道编码
 
-| 渠道         | 编码            |
-| :--------- | :------------ |
-| 支付宝移动支付    | alipay_app    |
-| 微信移动支付     | wechat_app    |
-| Apple Pay  | apple_pay_app |
-| 微信公众号      | wechat_wap    |
-| 支付宝即时到账    | alipay_web    |
-| 拉卡拉PC端支付   | lakala_web    |
-| 拉卡拉移动SDK支付 | lakala_app    |
+| 渠道           | 编码            |
+| :----------- | :------------ |
+| 支付宝移动支付      | alipay_app    |
+| 微信移动支付       | wechat_app    |
+| Apple Pay    | apple_pay_app |
+| 微信公众号        | wechat_wap    |
+| 支付宝即时到账      | alipay_web    |
+| 拉卡拉 PC 端支付   | lakala_web    |
+| 拉卡拉移动 SDK 支付 | lakala_app    |
+| 拉卡拉 H5 支付    | lakala_h5     |
 
 
 
@@ -209,6 +210,7 @@ Refund对象
 | 支付宝即时到账    | 无                                        |                                          |
 | 拉卡拉PC端支付   | user_id: 必填，用户在商户系统中的唯一标识；               | {"user_id":"aaa111"}                     |
 | 拉卡拉移动SDK支付 | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/"} |
+| 拉卡拉 H5 支付  | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址；<br>show_url: 必填，支付界面的返回按钮跳转的地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/,"return_url":"http://www.abc.cn/charge"} |
 
 
 
