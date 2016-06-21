@@ -163,6 +163,6 @@ Server SDK下载地址：https://github.com/paymax/paymax-server-sdk-java
 
 客户端暂时只提供iOS和Android版SDK。
 
-* [SDK下载](sdk)
+* [SDK下载](https://www.paymax.cc/dlsdk.html)
 * [iOS SDK集成指南](iOS SDK.md)
 * [Android SDK集成指南](Android SDK.md)
