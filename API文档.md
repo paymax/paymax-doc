@@ -1,34 +1,122 @@
 ## 签名和验签
 
 1. https传输协议
-2. 数据使用RSA签名和验签
 
-签名生成方法： 
-我们采用的签名方式是对HTTP请求的请求体签名，并将签名值放入Header中，key为sign。
+2. **采用双向RSA签名**
 
-假如请求体为：
+   商户在发送请求时，需要对使用商户的私钥对请求数据进行签名。在接收到返回值时，需要对返回数据中的签名进行校验。
 
-```javascript
-{
-	"order_no":"paymax-11110002",
-	"amount":2.01,
-	"subject":"test",
-	"body":"test",
-	"channel":"alipay_app",
-	"app":"app_kdjksldf93oksd923oks",
-	"client_ip":"127.0.0.1"
-}
-```
+3. 公钥交换
 
-需要将请求体以UTF-8编码转换成字节数组，然后使用商户私钥对其签名，签名算法为SHA1WithRSA。并将签名结果和Secret Key分别放入HTTP请求的Header中，例如：
+   * 商户在Paymax网站设置商户公钥，Paymax使用该公钥验签商户请求
+   * Paymax公钥可以在Paymax网站进行获取，用于验签Paymax的返回数据
 
-```http
-POST /v1/charges HTTP/1.1
-Host: https://www.paymax.cc/merchant-api
-ContentType: application/json
-Authorization: {填入Secret Key}
-sign: {填入签名结果}
-```
+   ​
+
+
+#### 请求数据签名：
+
+参与签名的字段及顺序：
+
+| 顺序   | 参数            | 获取位置        | 描述                             | 示例                                       |
+| ---- | ------------- | ----------- | :----------------------------- | ---------------------------------------- |
+| 1    | method        | http_method | 请求方法，小写(post/get)              | post                                     |
+| 2    | uri           | url         | 统一资源标识符【API方法】                 | /v1/charges                              |
+| 3    | query_string  | url         | 查询字符串                          | a=1&b=2&c=3                              |
+| 4    | nonce         | header      | 一次性随机数                         | 049e73d6e0744a7491cda2a0a537b90d         |
+| 5    | timestamp     | header      | 时间戳                            | 1466399895704                            |
+| 6    | Authorization | header      | 商户secret key,Paymax 提供给商户的唯一标识 | 5b97b3138041437587646b37f52dc7f7         |
+| 7    | request_data  | body        | 请求数据                           | {"amount":1,"app":"app_49b0f1dd741646d2b277524de2785836","body":"Your Body","description":"description","subject":"Your Subject","channel":"alipay_app","client_ip":"127.0.0.1","order_no":"d0a4877e-39fa-4704-a3e1-ca484a7f1363","metadata":{"metadata_key1":"metadata_value1","metadata_key2":"metadata_value2"},"currency":"CNY"} |
+
+
+
+签名步骤：
+
+1. 签名前以 '\n' 拼接各个字段：
+
+   ```
+   method+'\n'+uri+'\n'+query_string+'\n'+nonce+'\n'+timestamp+'\n'+Authorization+'\n'+request_data
+   ```
+
+   组装成要签名的数据，例如：
+
+   ```
+   post
+   /v1/charges
+   a=1&b=2&c=3
+   7650d33c9b6f4e8a8025465061937376
+   1466404370089
+   5b97b3138041437587646b37f52dc7f7
+   {"amount":1,"app":"app_49b0f1dd741646d2b277524de2785836","body":"Your Body","description":"description","subject":"Your Subject","channel":"alipay_app","client_ip":"127.0.0.1","order_no":"a2c37ff4-e253-4d69-803f-2b097a9c995f","metadata":{"metadata_key1":"metadata_value1","metadata_key2":"metadata_value2"},"currency":"CNY"}
+   ```
+
+   ​
+
+2. 以UTF-8编码将待签名字符串转换成字节数组，然后使用**商户私钥**对其签名，签名算法为SHA1WithRSA，将签名后的结果以Base64编码转码后存放到header中，key为'sign。
+
+   假如签名结果为：
+
+   ```
+   BkBa8OLkU2KzRIrWA4swP5WCSouVwXHFAUM6NlJlgDGbMQYKKvVveE30pXppPcesRLPPlpTctFdCt+nY4czX79efg19FDEizq94d+HAsE/3dtzUMiiFyxOWFH50FGO+gJZDAEpYQRCdJlOs6D380ta+y0wRfUhlfgX1+RXtcDnA=
+   ```
+
+   则最后的请求Header是：
+
+   ```http
+   POST /v1/charges HTTP/1.1
+   Host: https://www.paymax.cc/merchant-api
+   ContentType: application/json
+   Authorization: 5b97b3138041437587646b37f52dc7f7
+   nonce: 049e73d6e0744a7491cda2a0a537b90d
+   timestamp: 1466399895704
+   sign: BkBa8OLkU2KzRIrWA4swP5WCSouVwXHFAUM6NlJlgDGbMQYKKvVveE30pXppPcesRLPPlpTctFdCt+nY4czX79efg19FDEizq94d+HAsE/3dtzUMiiFyxOWFH50FGO+gJZDAEpYQRCdJlOs6D380ta+y0wRfUhlfgX1+RXtcDnA=
+   ```
+
+
+
+#### 响应数据验签
+
+参与验签的字段及顺序：
+
+| 顺序   | 参数            | 获取位置   | 描述                             | 示例                               |
+| ---- | ------------- | ------ | :----------------------------- | -------------------------------- |
+| 1    | nonce         | header | 一次性随机数                         | 691aefb20d874d3f8fb9219331868868 |
+| 2    | timestamp     | header | 时间戳                            | 1466399895704                    |
+| 3    | Authorization | header | 商户secret key,Paymax 提供给商户的唯一标识 | 5b97b3138041437587646b37f52dc7f7 |
+| 4    | response_data | body   | 响应数据(json格式)                   | {"amount":1,"currency":"CNY"}    |
+
+
+
+验签步骤：
+
+1. 验签前以 '\n' 拼接各个字段：
+
+   ```
+   nonce+'\n'+timestamp+'\n'+Authorization+'\n'+response_data
+   ```
+
+   组装成要验签的数据，例如：
+
+   ```
+   1095f1872473413c8c8ce51979f3ca6d
+   1466404452749
+   5b97b3138041437587646b37f52dc7f7
+   {"amount":1,"currency":"CNY"}
+   ```
+
+2. 以UTF-8编码将待验签字符串转换成字节数组，然后使用**Paymax公钥**对其签名，签名算法为SHA1WithRSA。
+
+3. 将第二步的签名结果和Header中取到的sign进行比对，相同即为验签通过，可以说明该响应数据来自于Paymax。
+
+
+
+#### 注意事项
+
+1. 对数据进行签名或验签时，字段顺序不能变；
+2. 对签名后的值要进行Base64Encode后才能往header中存放；
+3. 验签时对获取到的签名数据【sign】 要进行 Base64 Decode后再进行验证；
+4. 验签时要对 签名数据、商户secret key、请求的时效性 进行验证。
+
 
 
 ## 支付
@@ -78,8 +166,10 @@ sign: {填入签名结果}
 POST /v1/charges HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
-Authorization: {SECRET_KEY}
-sign: {sign}
+Authorization: {填入Secret Key}
+nonce: {填入nonce随机字符串}
+timestamp: {填入timestamp}
+sign: {填入签名结果}
 ```
 
 请求参数：
@@ -112,8 +202,10 @@ Charge对象
 GET /v1/charges/{CHARGE_ID} HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
-Authorization: {SECRET_KEY}
-sign: {sign}
+Authorization: {填入Secret Key}
+nonce: {填入nonce随机字符串}
+timestamp: {填入timestamp}
+sign: {填入签名结果}
 ```
 
 返回：
@@ -152,8 +244,10 @@ Charge对象
 POST /v1/charges/{CHARGE_ID}/refunds HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
-Authorization: {SECRET_KEY}
-sign: {sign}
+Authorization: {填入Secret Key}
+nonce: {填入nonce随机字符串}
+timestamp: {填入timestamp}
+sign: {填入签名结果}
 ```
 
 请求参数：
@@ -210,7 +304,7 @@ Refund对象
 | 支付宝即时到账    | 无                                        |                                          |
 | 拉卡拉PC端支付   | user_id: 必填，用户在商户系统中的唯一标识；               | {"user_id":"aaa111"}                     |
 | 拉卡拉移动SDK支付 | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/"} |
-| 拉卡拉 H5 支付  | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址；<br>show_url: 必填，支付界面的返回按钮跳转的地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/,"return_url":"http://www.abc.cn/charge"} |
+| 拉卡拉 H5 支付  | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址；<br>show_url: 必填，支付界面的返回按钮跳转的地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/,"show_url":"http://www.abc.cn/charge"} |
 
 
 
