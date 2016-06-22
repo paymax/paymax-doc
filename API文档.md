@@ -50,9 +50,9 @@
    {"amount":1,"app":"app_49b0f1dd741646d2b277524de2785836","body":"Your Body","description":"description","subject":"Your Subject","channel":"alipay_app","client_ip":"127.0.0.1","order_no":"a2c37ff4-e253-4d69-803f-2b097a9c995f","metadata":{"metadata_key1":"metadata_value1","metadata_key2":"metadata_value2"},"currency":"CNY"}
    ```
 
-   ​
+   
 
-2. 以UTF-8编码将待签名字符串转换成字节数组，然后使用**商户私钥**对其签名，签名算法为SHA1WithRSA，将签名后的结果以Base64编码转码后存放到header中，key为'sign。
+2. 以UTF-8编码将待签名字符串转换成字节数组，然后使用**商户私钥**对其签名，签名算法为SHA1WithRSA，将签名后的结果以Base64编码转码后存放到header中，key为'sign'。
 
    假如签名结果为：
 
@@ -300,8 +300,8 @@ Refund对象
 | 支付宝移动支付    | 无                                        |                                          |
 | 微信移动支付     | 无                                        |                                          |
 | Apple Pay  | 无                                        |                                          |
-| 微信公众号      | 无                                        |                                          |
-| 支付宝即时到账    | 无                                        |                                          |
+| 微信公众号      | open_id：必填，用户在公众号下的唯一标识                                        |      {"open_id":"obc-jswk25IUGp3q8RPTYu083rmk"}                                    |
+| 支付宝即时到账    | return_url：必填，支付完成后回跳地址 <br> show_url：非必填，商品在支付宝支付页面的展示“链接地址”                                      |    {"show_url":"http://www.baidu.com","return_url":"http://www.baidu.com"}                                      | 
 | 拉卡拉PC端支付   | user_id: 必填，用户在商户系统中的唯一标识；               | {"user_id":"aaa111"}                     |
 | 拉卡拉移动SDK支付 | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/"} |
 | 拉卡拉 H5 支付  | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址；<br>show_url: 必填，支付界面的返回按钮跳转的地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/,"show_url":"http://www.abc.cn/charge"} |
