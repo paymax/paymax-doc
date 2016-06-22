@@ -284,8 +284,10 @@ Refund对象
 GET /v1/charges/{CHARGE_ID}/refunds/{REFUND_ID} HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
 ContentType: application/json
-Authorization: {SECRET_KEY}
-sign: {sign}
+Authorization: {填入Secret Key}
+nonce: {填入nonce随机字符串}
+timestamp: {填入timestamp}
+sign: {填入签名结果}
 ```
 
 返回：
