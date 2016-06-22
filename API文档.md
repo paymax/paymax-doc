@@ -322,7 +322,7 @@ Refund对象
 | 支付宝即时到账    | return_url：必填，支付完成后回跳地址 <br> show_url：非必填，商品在支付宝支付页面的展示“链接地址” | {"show_url":"http://www.baidu.com","return_url":"http://www.baidu.com"} |
 | 拉卡拉PC端支付   | user_id: 必填，用户在商户系统中的唯一标识；               | {"user_id":"aaa111"}                     |
 | 拉卡拉移动SDK支付 | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/"} |
-| 拉卡拉 H5 支付  | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址；<br>show_url: 必填，支付界面的返回按钮跳转的地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/,"show_url":"http://www.abc.cn/charge"} |
+| 拉卡拉 H5 支付  | user_id: 必填，用户在商户系统中的唯一标识；<br>return_url: 必填，支付完成后的回调地址；<br>show_url: 必填，支付界面的返回按钮跳转的地址； | {"user_id":"aaa111","return_url":"http://www.abc.cn/","show_url":"http://www.abc.cn/charge"} |
 
 
 
