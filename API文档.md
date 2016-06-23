@@ -192,6 +192,7 @@ Refund对象
 | 微信移动支付       | wechat_app    |
 | Apple Pay    | apple_pay_app |
 | 微信公众号        | wechat_wap    |
+|微信公众号（C2B扫码）支付|wechat_csb  |
 | 支付宝即时到账      | alipay_web    |
 | 拉卡拉 PC 端支付   | lakala_web    |
 | 拉卡拉移动 SDK 支付 | lakala_app    |
