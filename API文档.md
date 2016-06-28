@@ -173,7 +173,7 @@ sign: Lp6TovxVq1r+qgai/B7M7ovV8NDsncZ6j6GfFUlR6QGVPtvpqkliS2kgo/mfm6AgFqpVy+edOG
 
 
 
-### 发起支付
+### 发起支付（下单）
 
 使用HTTP协议调用支付接口发起请求：
 
