@@ -125,29 +125,8 @@ Server SDK下载地址：https://github.com/paymax/paymax-server-sdk-java
 	
 	![Webhooks](image/webhooks.png)
 	
-	支付结果的消息示例：
-	
-	```json
-{
-	"notifyNo": "evt_951efd9ec5054478acaa96bf22e0a8cc",
-	"timeCreated": 1466408405082,
-	"type": "CHARGE",
-	"data": {
-		"amount": 1.0000,
-		"body": "Your Body",
-		"client_ip": "127.0.0.1",
-		"currency": "CNY",
-		"description": "description",
-		"id": "ch_cbd565a7b4c8a8ef0214b5e2",
-		"livemode": false,
-		"order_no": "9aa85e6b-5288-409a-bb82-be23b21d6036",
-		"status": "SUCCEED",
-		"subject": "Your Subject",
-		"time_expire": 1466408043982
-	}
-}
-	```
-	
+	详情见：[webhooks通知](webhooks通知.md)
+		
 6. 查看支付订单
 
 	一切配置成功之后，您就可以尝试进行真正的支付。您每发起一笔支付，都会在Paymax网站的订单管理页面有记录。
