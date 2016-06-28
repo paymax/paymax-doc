@@ -27,7 +27,7 @@
 
 paymax是否重发，取决于商户收到通知后response的结果是否为success字符串。若不是，才会按照一定机制重发，直到收到success为止。
 
-当然，paymax重发的时间间隔也会随着重发次数慢慢变长。
+当然，paymax重发的时间间隔也会随着重发次数逐步变长。
 
 
 ###通知格式
@@ -62,7 +62,7 @@ paymax是否重发，取决于商户收到通知后response的结果是否为suc
 
 | 参数              | 类型      | 描述                                       |
 | -------------- | ------- | ---------------------------------------- |
-|      data     |    Charge对象  |  详情见 [API文档](API文档.md) 中对Charge对象的说明 |
+|      data     |    Charge对象  |  详情见 [API文档](API文档.md#支付) 中对Charge对象的说明 |
 | notifyNo    |   String|  通知事件唯一标识 |
 | timeCreated | Long  | 时间戳，自1970年以后的毫秒数  |
 | type |  String |  通知类型，共以下几种:<br/> CHARGE : 支付 <br/> REFUND : 退款 |
@@ -71,7 +71,7 @@ paymax是否重发，取决于商户收到通知后response的结果是否为suc
 
 ###如何验签
 
-每一次事件通知，paymax都会用私钥对request body整体做签名，并将签名后的结果放request header中，header名称sign。
+每一次事件通知，paymax都会对request body整体做签名，并将签名后的结果放request header中，header名称sign。
 
 签名算法为SHA1WithRSA，签名时会使用paymax官方私钥做签名，所以商户验签时需要用paymax官方公钥来做验签。
 
