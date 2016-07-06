@@ -32,11 +32,13 @@
 
 签名步骤：
 
-1. 签名前以 '\n' 拼接各个字段：
+1. 签名前以 换行符（"\n"） 拼接各个字段：
 
    ```
-   method+'\n'+uri+'\n'+query_string+'\n'+nonce+'\n'+timestamp+'\n'+Authorization+'\n'+request_data
+   method+"\n"+uri+"\n"+query_string+"\n"+nonce+"\n"+timestamp+"\n"+Authorization+"\n"+request_data
    ```
+
+   **不同的语言，换行符可能有所不同**
 
    组装成要签名的数据，例如：
 
@@ -398,3 +400,45 @@ user_id: 必填，用户在商户系统中的唯一标识；
 2. 不需要商户手动确认的退款
 
    除了支付宝之外，其他的渠道进行退款都不需要用户手动确认，Paymax会在退款状态发生改变时发送Webhooks通知。
+
+
+## 响应错误码
+
+当调用API接口失败时，会返回一个json对象，标明失败的原因和具体描述。
+
+例如：
+
+```json
+{
+  "failure_code": "SECRET_KEY_IS_BLANK",
+  "failure_msg": "SecretKey为空"
+}
+```
+
+* failure_code是对失败原因的唯一标识，failure_msg是对失败原因的进一步的解释和描述
+
+
+* 对于同一种failure_code，可能会有多种failure_msg。
+
+
+
+**详细的错误代码表及示例：**
+
+
+| 错误码(failure_code)          | 描述示例(failure_msg) | 说明                                    |
+| -------------------------- | ----------------- | ------------------------------------- |
+| SECRET_KEY_IS_BLANK        | SecretKey为空       |                                       |
+| SECRET_KEY_IS_INVALID      | 非法的SecretKey      |                                       |
+| SIGN_CHECK_FAILED          | 签名校验失败            | 签名校验的原因                               |
+| APP_NOT_EXISTED            | 应用不存在             |                                       |
+| ORDER_NO_NOT_EXIST         | 订单不存在             |                                       |
+| CHANNEL_NOT_AVAILABLE      | 该支付渠道未申请或者未开通     |                                       |
+| AMOUNT_NOT_ENOUGH          | 金额不足              |                                       |
+| MULTI_REFUND_RECORDS       | 已经存在一笔处理中的退款      | Paymax同时只能存在一笔处理中的退款                  |
+| ORDER_NO_DUPLICATE         | 商户订单号已存在          | 商户使用相同的订单号重复下单                        |
+| ILLEGAL_ARGUMENT           | 参数错误              | 调用接口的参数错误                             |
+| ILLEGAL_CHANNEL_PARAMETERS | 支付渠道参数配置有误        |                                       |
+| CHANNEL_CHARGE_FAILED      | 向支付渠道下单失败         | Paymax向支付渠道下单时失败，会在failure_msg中显示失败原因 |
+| CHANNEL_FREEZE             | 该支付渠道已经被冻结交易      |                                       |
+| CHANNEL_REFUND_FAILED      | 向支付渠道申请退款失败       | Paymax向支付渠道退款时失败，会在failure_msg中显示失败原因 |
+| SYSTEM_ERROR               | 系统内部错误            | 由于某些原因造成系统处理异常，请联系Paymax处理            |
