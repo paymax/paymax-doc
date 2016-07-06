@@ -170,8 +170,8 @@ sign: Lp6TovxVq1r+qgai/B7M7ovV8NDsncZ6j6GfFUlR6QGVPtvpqkliS2kgo/mfm6AgFqpVy+edOG
 | credential      | String  | 支付凭据，用于调起支付APP或者跳转支付网关                   |
 | livemode        | Boolean | 是否是生产模式                                  |
 | status          | String  | 订单状态，只有三种（PROCESSING-处理中，SUCCEED-成功，FAILED-失败） |
-| failure_code    | String  | 订单的错误码，详见ERROR说明                         |
-| failure_msg     | String  | 订单的错误消息的描述                               |
+| failure_code    | String  | 订单的错误码，详见[响应错误码](#响应错误码)                 |
+| failure_msg     | String  | 订单的错误消息的描述，详见[响应错误码](#响应错误码)             |
 
 
 
@@ -250,8 +250,8 @@ Charge对象
 | time_created   | Long    | 订单创建时间，13位Unix时间戳                        |
 | time_succeed   | Long    | 订单退款完成时间，13位Unix时间戳                      |
 | status         | String  | 订单状态，只有三种（PROCESSING-处理中，SUCCEED-成功，FAILED-失败） |
-| failure_code   | String  | 订单的错误码，详见ERROR说明                         |
-| failure_msg    | String  | 订单的错误消息的描述                               |
+| failure_code   | String  | 订单的错误码，详见[响应错误码](#响应错误码)                 |
+| failure_msg    | String  | 订单的错误消息的描述，详见[响应错误码](#响应错误码)             |
 
 
 ### 发起退款
@@ -300,17 +300,17 @@ Refund对象
 
 ## 支付渠道编码
 
-| 渠道           | 编码            |
-| :----------- | :------------ |
-| 支付宝移动支付      | alipay_app    |
-| 微信移动支付       | wechat_app    |
-| Apple Pay    | apple_pay_app |
-| 微信公众号        | wechat_wap    |
-|微信公众号（C2B扫码）支付|wechat_csb  |
-| 支付宝即时到账      | alipay_web    |
-| 拉卡拉 PC 端支付   | lakala_web    |
-| 拉卡拉移动 SDK 支付 | lakala_app    |
-| 拉卡拉 H5 支付    | lakala_h5     |
+| 渠道             | 编码            |
+| :------------- | :------------ |
+| 支付宝移动支付        | alipay_app    |
+| 微信移动支付         | wechat_app    |
+| Apple Pay      | apple_pay_app |
+| 微信公众号          | wechat_wap    |
+| 微信公众号（C2B扫码）支付 | wechat_csb    |
+| 支付宝即时到账        | alipay_web    |
+| 拉卡拉 PC 端支付     | lakala_web    |
+| 拉卡拉移动 SDK 支付   | lakala_app    |
+| 拉卡拉 H5 支付      | lakala_h5     |
 
 
 
@@ -401,6 +401,10 @@ user_id: 必填，用户在商户系统中的唯一标识；
 2. 不需要商户手动确认的退款
 
    除了支付宝之外，其他的渠道进行退款都不需要用户手动确认，Paymax会在退款状态发生改变时发送Webhooks通知。
+
+
+
+
 
 
 ## 响应错误码
