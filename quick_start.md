@@ -6,10 +6,15 @@
 
 请在以下地址，根据您的应用平台和开发语言选择相应的SDK
 
-Client SDK下载地址：https://github.com/paymax/paymax-doc/tree/master/sdk
-	
-Server SDK下载地址：https://github.com/paymax/paymax-server-sdk-java
+Client SDK下载地址：
 
+* [Android SDK](https://github.com/paymax/paymax-demo-android/archive/master.zip)
+* [iOS SDK](https://github.com/paymax/paymax-demo-ios/archive/master.zip)
+	
+Server SDK下载地址：
+
+* [Java版]((https://github.com/paymax/paymax-server-sdk-java/archive/master.zip))
+* [PHP版](https://github.com/paymax/paymax-server-sdk-php/archive/master.zip)
 
 ### 2. 集成开发
 	
