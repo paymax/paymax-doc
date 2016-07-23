@@ -26,7 +26,8 @@ Server SDK下载地址：
 	Paymax的数据传输使用RSA签名来验证数据可靠性，因此需要设置RSA签名秘钥。
 
 	Paymax Server SDK中提供了生成RSA密钥对的工具RSAKeyGenerateUtil，您可以直接用它来生成一对公私钥，并将公钥填写到Paymax网站“个人中心”-“基本信息”-“开发信息”中。
-	
+	如果您不想自己生成RSA秘钥，请参考[生成RSA秘钥](rsa_generate.md)。
+
 	**生成密钥对：**
 	
 	```java
