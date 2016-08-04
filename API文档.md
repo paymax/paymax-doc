@@ -352,11 +352,13 @@ open_id：必填，用户在公众号下的唯一标识
 
 #### 拉卡拉PC端支付
 
-user_id: 必填，用户在商户系统中的唯一标识；
+* user_id: 必填，用户在商户系统中的唯一标识；
+* return_url: 必填，支付完成后的回调地址；
 
 ```json
 {
-  "user_id":"aaa111"
+  "user_id":"aaa111",
+  "return_url":"http://www.abc.cn/"
 }
 ```
 
