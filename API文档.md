@@ -308,8 +308,8 @@ Refund对象
 | 微信公众号          | wechat_wap    |
 | 微信公众号（C2B扫码）支付 | wechat_csb    |
 | 支付宝即时到账        | alipay_web    |
-| 拉卡拉网关支付     | lakala_web    |
-| 拉卡拉PC快捷支付   | lakala_web_fast |
+| 拉卡拉 PC 网关支付     | lakala_web    |
+| 拉卡拉 PC 快捷支付   | lakala_web_fast |
 | 拉卡拉移动 SDK 支付   | lakala_app    |
 | 拉卡拉 H5 支付      | lakala_h5     |
 
@@ -351,7 +351,7 @@ open_id：必填，用户在公众号下的唯一标识
 }
 ```
 
-#### 拉卡拉网关支付
+#### 拉卡拉 PC 网关支付
 
 * user_id: 必填，用户在商户系统中的唯一标识；
 * return_url: 必填，支付完成后的回调地址；
@@ -363,7 +363,7 @@ open_id：必填，用户在公众号下的唯一标识
 }
 ```
 
-#### 拉卡拉PC快捷支付
+#### 拉卡拉 PC 快捷支付
 
 * user_id: 必填，用户在商户系统中的唯一标识；
 * return_url: 必填，支付完成后的回调地址；
