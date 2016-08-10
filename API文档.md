@@ -11,7 +11,6 @@
    * 商户在Paymax网站设置商户公钥，Paymax使用该公钥验签商户请求
    * Paymax公钥可以在Paymax网站进行获取，用于验签Paymax的返回数据
 
-   
 
 
 #### 请求数据签名：
@@ -21,7 +20,7 @@
 | 顺序   | 参数            | 获取位置        | 描述                             | 示例                                       |
 | ---- | ------------- | ----------- | :----------------------------- | ---------------------------------------- |
 | 1    | method        | http_method | 请求方法，小写(post/get)              | post                                     |
-| 2    | uri           | url         | 统一资源标识符【API方法】                 | /v1/charges                              |
+| 2    | uri           | url         | 统一资源标识符[API方法]                 | /v1/charges                              |
 | 3    | query_string  | url         | 查询字符串                          | a=1&b=2&c=3                              |
 | 4    | nonce         | header      | 一次性随机数                         | 049e73d6e0744a7491cda2a0a537b90d         |
 | 5    | timestamp     | header      | 时间戳                            | 1466399895704                            |
@@ -66,7 +65,7 @@
    ```http
    POST /v1/charges HTTP/1.1
    Host: https://www.paymax.cc/merchant-api
-   ContentType: application/json
+   ContentType: application/json;charset=utf-8
    Authorization: 5b97b3138041437587646b37f52dc7f7
    nonce: 049e73d6e0744a7491cda2a0a537b90d
    timestamp: 1466399895704
@@ -95,7 +94,8 @@
 返回的response示例：
 
 ```http
-ContentType: application/json
+
+ContentType: application/json;charset=utf-8
 Authorization: 5b97b3138041437587646b37f52dc7f7
 nonce: 1095f1872473413c8c8ce51979f3ca6d
 timestamp: 1466404452749
@@ -183,7 +183,7 @@ sign: Lp6TovxVq1r+qgai/B7M7ovV8NDsncZ6j6GfFUlR6QGVPtvpqkliS2kgo/mfm6AgFqpVy+edOG
 ```http
 POST /v1/charges HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
-ContentType: application/json
+ContentType: application/json;charset=utf-8
 Authorization: {填入Secret Key}
 nonce: {填入nonce随机字符串}
 timestamp: {填入timestamp}
@@ -219,7 +219,7 @@ Charge对象
 ```http
 GET /v1/charges/{CHARGE_ID} HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
-ContentType: application/json
+ContentType: application/json;charset=utf-8
 Authorization: {填入Secret Key}
 nonce: {填入nonce随机字符串}
 timestamp: {填入timestamp}
@@ -261,7 +261,7 @@ Charge对象
 ```http
 POST /v1/charges/{CHARGE_ID}/refunds HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
-ContentType: application/json
+ContentType: application/json;charset=utf-8
 Authorization: {填入Secret Key}
 nonce: {填入nonce随机字符串}
 timestamp: {填入timestamp}
@@ -285,7 +285,7 @@ Refund对象
 ```http
 GET /v1/charges/{CHARGE_ID}/refunds/{REFUND_ID} HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
-ContentType: application/json
+ContentType: application/json;charset=utf-8
 Authorization: {填入Secret Key}
 nonce: {填入nonce随机字符串}
 timestamp: {填入timestamp}
@@ -300,18 +300,18 @@ Refund对象
 
 ## 支付渠道编码
 
-| 渠道             | 编码            |
-| :------------- | :------------ |
-| 支付宝移动支付        | alipay_app    |
-| 微信移动支付         | wechat_app    |
-| Apple Pay      | apple_pay_app |
-| 微信公众号          | wechat_wap    |
-| 微信公众号（C2B扫码）支付 | wechat_csb    |
-| 支付宝即时到账        | alipay_web    |
-| 拉卡拉 PC 网关支付     | lakala_web    |
-| 拉卡拉 PC 快捷支付   | lakala_web_fast |
-| 拉卡拉移动 SDK 支付   | lakala_app    |
-| 拉卡拉 H5 支付      | lakala_h5     |
+| 渠道             | 编码              |
+| :------------- | :-------------- |
+| 支付宝移动支付        | alipay_app      |
+| 微信移动支付         | wechat_app      |
+| Apple Pay      | apple_pay_app   |
+| 微信公众号          | wechat_wap      |
+| 微信公众号（C2B扫码）支付 | wechat_csb      |
+| 支付宝即时到账        | alipay_web      |
+| 拉卡拉 PC 网关支付    | lakala_web      |
+| 拉卡拉 PC 快捷支付    | lakala_web_fast |
+| 拉卡拉移动 SDK 支付   | lakala_app      |
+| 拉卡拉 H5 支付      | lakala_h5       |
 
 
 
