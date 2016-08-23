@@ -7,7 +7,7 @@ Paymax为您提供一站式集成化支付接入解决方案，通过Paymax的SD
 ### 我们能做什么
 
 **Paymax能够帮您：**
-	
+​	
 * 便捷的接入各主流支付渠道
 * 在后台统一管理所有支付渠道交易信息
 * 可视化的统计分析功能
@@ -24,22 +24,22 @@ Paymax为您提供一站式集成化支付接入解决方案，通过Paymax的SD
 * 拉卡拉 PC 快捷支付
 
 **我们支持的开发语言：**
-	
+​	
 服务器端接口方面，我们提供了基于HTTP协议的Web接口，因此理论上来说，任何语言都可以接入Paymax服务。同时我们提供Server SDK，方便您的服务器端集成Paymax服务；下载地址：
-	
+​	
 * [下载Server SDK Java版](https://github.com/paymax/paymax-server-sdk-java/archive/master.zip)
 * [下载Server SDK PHP版](https://github.com/paymax/paymax-server-sdk-php/archive/master.zip)
 * [下载Server SDK C#版](https://github.com/paymax/paymax-server-sdk-csharp/archive/master.zip)
+* [下载Server SDK NodeJS版](https://github.com/paymax/paymax-server-sdk-nodejs/archive/master.zip)
 * Python 开发中
 * Ruby 开发中
-* NodeJS 开发中
 * Go 开发中
-	
+
 同时我们提供了Client SDK，方便您在自己的APP中集成Paymax支付服务；Client SDK现在有iOS和Android版本，请根据您的APP平台选择相应的开发包。
-	
+​	
 * [下载Android SDK](https://github.com/paymax/paymax-demo-android/archive/master.zip)
 * [下载iOS SDK](https://github.com/paymax/paymax-demo-ios/archive/master.zip)
-	
+
 
 ### 需要您做什么
 
