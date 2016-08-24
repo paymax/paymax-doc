@@ -24,8 +24,6 @@ Server SDK下载地址：
 ### 2. 集成开发
 
 #### 服务器端集成
-服务器端暂时只提供Java版SDK。
-
 1. **生成和配置RSA签名密钥**
 
    Paymax的数据传输使用RSA签名来验证数据可靠性，因此需要设置RSA签名秘钥。
@@ -40,10 +38,9 @@ Server SDK下载地址：
    RSAKeyGenerateUtil.genKey();
    ```
 
+   **在Paymax网站设置商户公钥：**   
 
-   
-
-**在Paymax网站设置商户公钥：**   ![公钥设置](image/public_key.png)
+   ![公钥设置](image/public_key.png)
 
 2. **设置SecretKey和签名秘钥**
 
