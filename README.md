@@ -31,7 +31,7 @@ Paymax为您提供一站式集成化支付接入解决方案，通过Paymax的SD
 * [下载Server SDK PHP版](https://github.com/paymax/paymax-server-sdk-php/archive/master.zip)
 * [下载Server SDK C#版](https://github.com/paymax/paymax-server-sdk-csharp/archive/master.zip)
 * [下载Server SDK NodeJS版](https://github.com/paymax/paymax-server-sdk-nodejs/archive/master.zip)
-* Python 开发中
+* [下载Server SDK Python版](https://github.com/paymax/paymax-server-sdk-python/archive/master.zip)
 * Ruby 开发中
 * Go 开发中
 

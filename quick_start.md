@@ -17,6 +17,7 @@ Server SDK下载地址：
 * [PHP版](https://github.com/paymax/paymax-server-sdk-php/archive/master.zip)
 * [C#版](https://github.com/paymax/paymax-server-sdk-csharp/archive/master.zip)
 * [NodeJS版](https://github.com/paymax/paymax-server-sdk-nodejs/archive/master.zip)
+* [Python版](https://github.com/paymax/paymax-server-sdk-python/archive/master.zip)
 
 其他版本的SDK正在开发中。
 
