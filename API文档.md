@@ -11,7 +11,6 @@
     * [发起退款](#%E5%8F%91%E8%B5%B7%E9%80%80%E6%AC%BE)
     * [查询退款](#%E6%9F%A5%E8%AF%A2%E9%80%80%E6%AC%BE)
 * [下载对账单](#%E4%B8%8B%E8%BD%BD%E5%AF%B9%E8%B4%A6%E5%8D%95)
-	* [接口地址](#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80)
 	* [发起下载](#%E5%8F%91%E8%B5%B7%E4%B8%8B%E8%BD%BD)
 	* [返回结果](#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C)
 * [支付渠道编码](#%E6%94%AF%E4%BB%98%E6%B8%A0%E9%81%93%E7%BC%96%E7%A0%81)
@@ -332,19 +331,31 @@ Refund对象
 >应用场景
 
 商户可以通过该接口下载历史交易清单。比如掉单、系统错误等导致商户侧和Paymax侧数据不一致，通过对账单核对后可校正支付状态。
-## 接口地址
 
-[https://www.paymax.cc/merchant-api/statement/download](https://www.paymax.cc/merchant-api/statement/download)
 
 ## 发起下载
+
+使用HTTP协议调用对账单下载接口发起请求：
+
+
+```http
+POST /statement/download HTTP/1.1
+Host: https://www.paymax.cc/merchant-api
+ContentType: application/json;charset=utf-8
+Authorization: {填入Secret Key}
+nonce: {填入nonce随机字符串}
+timestamp: {填入timestamp}
+sign: {填入签名结果}
+```
+
 	
 >请求参数
 
-|字段名|变量名|必填|类型|示例值|描述|
-|---------|---------|------|------|---------|------|
-|指定下载日期|appointDay|是|String(8)|20161018|指定日期（只能是某个自然日，格式：yyyyMMdd）范围为最早前3个月，最晚昨天|
-|渠道类别|channelCategory|是|String| ALIPAY |Paymax支持下载的支付渠道类别：<br>ALIPAY（支付宝）<br>WECHAT（微信）<br>APPLE（苹果）<br>LAKALA（拉卡拉）
-|对账单交易类别|statementType|是|String|ALL|Paymax支持下载的对账单交易类别：<br>ALL（全部，不包含WECHAT_CSB）<br>REFUND（退款）<br>SUCCESS（交易）<br>WITHDRAW（提现）<br>WECHAT\_CSB（微信公众号 C2B扫码）|
+|参数|类型|必须|描述|
+|--------|------|------|---------|------|
+|appointDay|String(8)|是|指定日期（只能是某个自然日，格式：yyyyMMdd）范围为最早前3个月，最晚昨天|
+|channelCategory|String|是|Paymax支持下载的支付渠道类别：<br>ALIPAY（支付宝）<br>WECHAT（微信）<br>APPLE（苹果）<br>LAKALA（拉卡拉）
+|statementType|String|是|Paymax支持下载的对账单交易类别：<br>ALL（全部，**不包含WECHAT_CSB**）<br>REFUND（退款）<br>SUCCESS（交易）<br>WECHAT_CSB（微信公众号 C2B扫码）|
 
 >请求示例
 
@@ -542,5 +553,5 @@ open_id：必填，用户在公众号下的唯一标识
 | CHANNEL_CHARGE_FAILED      | 向支付渠道下单失败         | Paymax向支付渠道下单时失败，会在failure_msg中显示失败原因 |
 | CHANNEL_FREEZE             | 该支付渠道已经被冻结交易      |                                       |
 | CHANNEL_REFUND_FAILED      | 向支付渠道申请退款失败       | Paymax向支付渠道退款时失败，会在failure_msg中显示失败原因 |
-|OUT\_OF\_DOWNLOAD|下载次数超限|对于对账单的下载，Paymax有一些约定的配置，在一定的时间内，调用接口不能超过规定次数|
+|OUT_OF_DOWNLOAD|下载次数超限|对于对账单的下载，Paymax有一些约定的配置，在一定的时间内，调用接口不能超过规定次数|
 | SYSTEM_ERROR               | 系统内部错误            | 由于某些原因造成系统处理异常，请联系Paymax处理            |
