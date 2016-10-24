@@ -339,7 +339,7 @@ Refund对象
 
 
 ```http
-POST /statement/download HTTP/1.1
+POST /v1/statement/download HTTP/1.1
 Host: https://www.paymax.cc/merchant-api
 ContentType: application/json;charset=utf-8
 Authorization: {填入Secret Key}
