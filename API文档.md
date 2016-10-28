@@ -355,7 +355,16 @@ sign: {填入签名结果}
 |--------|------|------|---------|------|
 |appointDay|String(8)|是|指定日期（只能是某个自然日，格式：yyyyMMdd）范围为最早前3个月，最晚昨天|
 |channelCategory|String|是|Paymax支持下载的支付渠道类别：<br>ALIPAY（支付宝）<br>WECHAT（微信）<br>APPLE（苹果）<br>LAKALA（拉卡拉）
-|statementType|String|是|Paymax支持下载的对账单交易类别：<br>ALL（全部，**不包含WECHAT_CSB**）<br>REFUND（退款）<br>SUCCESS（交易）<br>WECHAT_CSB（微信公众号 C2B扫码）|
+|statementType|String|是|Paymax支持下载的对账单交易类别：<br>ALL（全部）<br>SUCCESS（交易）<br>REFUND（退款）<br>WECHAT_CSB（微信公众号 C2B扫码）|
+
+>各支付渠道适用的交易类别（非适用的传值不会查到数据）
+
+|渠道类别|交易类别|
+|--------|------|------|
+|ALIPAY| SUCCESS |
+| WECHAT |ALL（全部，**不包含WECHAT_CSB**）<br>SUCCESS <br> REFUND <br> WECHAT_CSB |
+| APPLE |ALL<br>SUCCESS <br> REFUND |
+| LAKALA |SUCCESS <br> REFUND |
 
 >请求示例
 
@@ -363,7 +372,7 @@ sign: {填入签名结果}
 {
 	"appointDay": "20161018",
 	"channelCategory": "ALIPAY",
-	"statementType": "ALL"
+	"statementType": "SUCCESS"
 }	
 ```
 
