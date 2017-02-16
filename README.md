@@ -138,7 +138,7 @@ Paymax为您提供一站式集成化支付接入解决方案，通过Paymax的SD
 * [下载Android SDK](https://github.com/paymax/paymax-demo-android/archive/master.zip)
 * [下载iOS SDK](https://github.com/paymax/paymax-demo-ios/archive/master.zip)
 
-聚合收银台,是Paymax在SDK基础上专门开发出的一个轻量级版本,内嵌支付页面,同时兼容PC端和移动端H5,不但降低了开发成本,同时优化了用户的支付体验。
+聚合收银台，是 Paymax 推出的一个轻量级产品，只需一行代码即可完成支付，商户可自定义支付渠道和显示顺序，兼容 PC 端页面和移动 H5 浏览器。不但降低了开发成本，同时优化了用户的支付体验。
 
 * [下载聚合收银台SDK](https://github.com/paymax/paymax-jssdk-demo/archive/master.zip)
 
