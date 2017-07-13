@@ -34,31 +34,77 @@ Paymax是否重发，取决于商户收到通知后response的结果是否为suc
 
 ###通知格式
 
-**示例**
+**支付示例**
 
 ```
 
  {
- 	"data": {
- 		"amount": 0.01,
- 		"body": "测试商品",
- 		"client_ip": "127.0.0.1",
- 		"currency": "CNY",
- 		"description": "测试商品描述信息",
- 		"id": "ch_846b3840118646249aba1e8f",
- 		"livemode": false,
- 		"order_no": "ETEN201606272002045rCT",
- 		"status": "SUCCEED",
- 		"subject": "测试商品标题",
- 		"time_expire": 1467032503680,
- 		"transaction_no": "201606060001365501"
- 	},
- 	"notifyNo": "evt_902f9912b51b4f62963382f2b796d899",
- 	"timeCreated": 1467028926044,
- 	"type": "CHARGE"
- }
+    "data":{
+        "amount":7,
+        "amount_refunded":0,
+        "amount_settle":0,
+        "body":"测试商品",
+        "client_ip":"120.197.202.48",
+        "credential":{
+            "wechat_wap":{
+                "jsApiParams":"{"appId":"wxbtest9e022e2d07","timeStamp":"1478361807","signType":"MD5","package":"prepay_id=test211060003265e6f4f86970458446dd081","nonceStr":"06ZSHzTTeswakmu4","paySign":"BB4706E3F97174AAC1341F25dssw88DA16"}"
+            }
+        },
+        "currency":"CNY",
+        "description":"测试商品描述信息",
+        "extra":{
+            "terminal_id":"9223131",
+            "open_id":"oOOL0jdyiLwslASo7UmSwrtOCW4k",
+            "merchant_id":"8221023420011716"
+        },
+        "id":"ch_5d0eca3b8f707ed425122e56",
+        "livemode":false,
+        "metadata":{
+            "callbackUrl":"http://www.demo.com"
+        },
+        "order_no":"ch_828d6ef97f3c45a3acd41a59",
+        "refunds":[
+
+        ],
+        "status":"SUCCEED",
+        "subject":"测试商品标题",
+        "time_created":1478361807000,
+        "time_expire":1478362046272,
+        "time_paid":1478361806000,
+        "transaction_no":"4004512001201611068876533536"
+    },
+    "notifyNo":"evt_7fb2378f457ewerwa9afe17a942ae389e",
+    "timeCreated":1478361840304,
+    "type":"CHARGE"
+}
+```
+**退款示例**
+
 ```
 
+ {
+    "data":{
+        "amount":0.01,
+        "charge":"ch_6abba29e41edddd8b062dab",
+        "description":"协商一致退款",
+        "extra":{
+            "refundUrl":"http://www.demo.com/gateway.do?sign=251af6477bxxxxxxx"
+        },
+        "id":"re_06cfeewewe4dc14de10fe",
+        "metadata":{
+            "use_id":"12345678"
+        },
+        "order_no":"06cf59c008b004dc14de10fe",
+        "status":"SUCCEED",
+        "time_created":1478518692000,
+        "time_succeed":1478518705000,
+        "transaction_no":"2016110721001004480236849549"
+    },
+    "notifyNo":"evt_eff98bb453f0429b9b8fd5adfasdfc7c9",
+    "timeCreated":1478518708532,
+    "type":"REFUND"
+}
+```
 **参数说明**
 
 | 参数          | 类型                 | 描述                                       |
