@@ -16,6 +16,7 @@
 * [支付渠道编码](#%E6%94%AF%E4%BB%98%E6%B8%A0%E9%81%93%E7%BC%96%E7%A0%81)
 * [支付渠道附加参数](#%E6%94%AF%E4%BB%98%E6%B8%A0%E9%81%93%E9%99%84%E5%8A%A0%E5%8F%82%E6%95%B0)
     * [支付宝移动支付](#%E6%94%AF%E4%BB%98%E5%AE%9D%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98)
+    * [支付宝扫码支付](#%E6%94%AF%E4%BB%98%E5%AE%9D%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98)
     * [微信移动支付](#%E5%BE%AE%E4%BF%A1%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98)
     * [Apple Pay](#apple-pay)
     * [微信公众号](#%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7)
@@ -362,14 +363,15 @@ sign: {填入签名结果}
 | ---------- | --------- | ---- | ---------------------------------------- |
 | appointDay | String(8) | 是    | 指定日期（只能是某个自然日，格式：yyyyMMdd）范围为最早前3个月，最晚昨天 |
 |channelCategory|String|是|Paymax支持下载的支付渠道类别：<br>ALIPAY（支付宝）<br>WECHAT（微信）<br>APPLE（苹果）<br>LAKALA（拉卡拉）
-|statementType|String|是|Paymax支持下载的对账单交易类别：<br>ALL（全部）<br>SUCCESS（交易）<br>REFUND（退款）<br>WECHAT_CSB（微信公众号 C2B扫码）|
+|statementType|String|是|Paymax支持下载的对账单交易类别：<br>ALL（全部）<br>SUCCESS（交易）<br>REFUND（退款）<br>WECHAT\_CSB（微信公众号 C2B扫码）<br>ALIPAY\_CSB（支付宝扫码）|
 
 >各支付渠道适用的交易类别（非适用的传值不会查到数据）
 
 
 | 渠道类别   | 交易类别 | 说明 |
 | ------ | ----------- | ----------- |
-| ALIPAY | SUCCESS | 支付宝移动和支付宝即时到账两个渠道的所有支付交易和退款交易 |
+| ALIPAY | SUCCESS(**不包含ALIPAY_CSB**) | 支付宝移动和支付宝即时到账两个渠道的所有支付交易和退款交易 |
+| ALIPAY | ALIPAY_CSB | 支付宝扫码支付渠道的支付成功和退款成功的交易 |
 | WECHAT | ALL（全部，**不包含WECHAT_CSB**）| 微信移动app渠道的所有支付交易和退款交易 |
 | WECHAT | SUCCESS | 微信移动app渠道的所有支付交易 |
 | WECHAT | REFUND | 微信移动app渠道的所有退款交易 |
@@ -417,13 +419,14 @@ sign: {填入签名结果}
 | 渠道             | 编码              |
 | :------------- | :-------------- |
 | 支付宝移动支付        | alipay_app      |
+| 支付宝扫码支付        | alipay_csb      |
 | 微信移动支付         | wechat_app      |
-| Apple Pay      | apple_pay_app   |
+| Apple Pay      | apple\_pay\_app   |
 | 微信公众号          | wechat_wap      |
 | 微信公众号（C2B扫码）支付 | wechat_csb      |
 | 支付宝即时到账        | alipay_web      |
 | 拉卡拉 PC 网关支付    | lakala_web      |
-| 拉卡拉 PC 快捷支付    | lakala_web_fast |
+| 拉卡拉 PC 快捷支付    | lakala\_web\_fast |
 | 拉卡拉移动 SDK 支付   | lakala_app      |
 | 拉卡拉 H5 支付      | lakala_h5       |
 
@@ -432,6 +435,10 @@ sign: {填入签名结果}
 ## 支付渠道附加参数
 
 #### 支付宝移动支付
+
+无
+
+#### 支付宝扫码支付
 
 无
 
