@@ -181,7 +181,7 @@ sign: Lp6TovxVq1r+qgai/B7M7ovV8NDsncZ6j6GfFUlR6QGVPtvpqkliS2kgo/mfm6AgFqpVy+edOG
 | id              | String  | 支付订单id，系统内唯一，以“ch_”开头，后跟24位随机数           |
 | order_no        | String  | 商户订单号，在商户系统内唯一，1-64位数字或字母，不允许特殊字符     |
 | amount          | Decimal | 订单总金额，大于0的数字，单位是该币种的货币单位                 |
-| subject         | String  | 购买商品的标题，最长32位                            |
+| subject         | String  | 购买商品的标题，不同渠道的字节长度要求不同，具体如下：<br>微信(app移动支付)：128字节<br>微信公众号(C2B扫码/公众号支付)：128字节<br>支付宝(移动支付/即时到账)：256字节，最长为128个汉字。<br>支付宝扫码：128字节<br>拉卡拉(移动SDK/PC快捷/PC网关/移动网页支付)：60字节                              |
 | body            | String  | 购买商品的描述信息，最长128个字符                       |
 | channel         | String  | 支付渠道编码，唯一标识一个支付渠道，参考[支付渠道编码](#支付渠道编码)    |
 | client_ip       | String  | 发起支付的客户端IP                               |
@@ -228,7 +228,7 @@ sign: {填入签名结果}
 | :---------- | ------- | ----- | ---------------------------------------- |
 | order_no    | String  | true  | 商户订单号，在商户系统内唯一，1-64位数字或字母，不允许特殊字符        |
 | amount      | Decimal | true  | 订单总金额，大于0的数字，单位是该币种的货币单位                 |
-| subject     | String  | true  | 购买商品的标题，最长32位                            |
+| subject     | String  | true  | 购买商品的标题，不同渠道的字节长度要求不同，具体如下：<br>微信(app移动支付)：128字节<br>微信公众号(C2B扫码/公众号支付)：128字节<br>支付宝(移动支付/即时到账)：256字节，最长为128个汉字。<br>支付宝扫码：128字节<br>拉卡拉(移动SDK/PC快捷/PC网关/移动网页支付)：60字节                  |
 | body        | String  | true  | 购买商品的描述信息，最长128个字符                       |
 | channel     | String  | true  | 支付渠道编码，唯一标识一个支付渠道，参考[支付渠道编码](#支付渠道编码)    |
 | app         | String  | true  | 应用的appKey                                |
@@ -585,15 +585,28 @@ open_id：必填，用户在公众号下的唯一标识
 
 | 字段        | 错误原因         | 错误提示                       |
 | --------- | ------------ | -------------------------- |
-| order_no  | 为空           | order_no 参数格式不正确！          |
-| amount    | 为空           | amount 不能为空                |
-| amount    | 小于等于0        | amount 参数格式不正确,请使用大于0的数字！  |
-| subject   | 为空           | subject 不能为空               |
-| subject   | 长度超过32位      | subject 参数格式不正确,长度不能超过32位！ |
-| body      | 为空           | body 参数格式不正确！              |
-| channel   | 为空           | channel 参数格式不正确！           |
-| app       | 为空           | app 参数格式不正确！               |
-| client_ip | 为空或IP地址格式不正确 | client ip 参数格式不正确！         |
+| order_no  | 为空       | order_no 参数格式不正确！          |
+| amount    | 为空       | amount 不能为空 ！               |
+| amount   | 小于等于0 | amount 参数格式不正确,请使用大于0的数字！|
+| subject   | 为空    | subject 不能为空               |
+| subject |长度超过规定长度|subject 参数格式不正确,长度超长|
+| body| 为空      | body不能为空   |
+| body| 长度超过128位 | body 参数格式不正确,长度不能超过128位！   |
+| channel   | 为空     | channel 参数格式不正确！   |
+| app       | 为空   | app 参数格式不正确！     |
+| client_ip | 为空或IP地址格式不正确 |client ip 参数格式不正确！ |
+|time_expire|为空或者格式不为13位毫秒数|time_expire，时间格式不正确。需要提供13位Unix时间戳（毫秒）|
+|chargeId|为空|订单号不能为空！|
+|channelCategory|为空|channelCategory 不能为空|
+|channelCategory|不合法|channelCategory 不合法|
+|statementType|为空|statementType 不能为空|
+| statementType |不合法|statementType 不合法|
+|appointDay|为空|appointDay 不能为空|
+|appointDay|格式错误|appointDay 格式有误|
+|appointDay|今天及以后的日期|只能获取最晚至昨天的对账文件|
+|appointDay|3个月前的日期|只能获取最早3个月的对账文件|
+
+
 
 **各支付渠道附加参数（extra）错误提示**
 
