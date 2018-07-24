@@ -565,20 +565,20 @@ open_id：必填，用户在公众号下的唯一标识
 | -------------------------- | ----------------- | ---------------------------------------- |
 | SECRET_KEY_IS_BLANK        | SecretKey为空       |                                          |
 | SECRET_KEY_IS_INVALID      | 非法的SecretKey      |                                          |
-| SIGN_CHECK_FAILED          | 签名校验失败            | 签名校验的原因                                  |
+| SIGN_CHECK_FAILED          | 签名验证失败            | 签名校验的原因                                  |
 | APP_NOT_EXISTED            | 应用不存在             |                                          |
-| ORDER_NO_NOT_EXIST         | 订单不存在             |                                          |
+| ORDER_NO_NOT_EXIST         | 原交易不存在        |                                          |
 | CHANNEL_NOT_AVAILABLE      | 该支付渠道未申请或者未开通     |                                          |
-| AMOUNT_NOT_ENOUGH          | 金额不足              |                                          |
+| AMOUNT_NOT_ENOUGH          | 交易失败，余额不足        |                                          |
 | MULTI_REFUND_RECORDS       | 已经存在一笔处理中的退款      | Paymax同时只能存在一笔处理中的退款                     |
-| ORDER_NO_DUPLICATE         | 商户订单号已存在          | 商户使用相同的订单号重复下单                           |
+| ORDER_NO_DUPLICATE         | 交易单号重复       | 商户使用相同的订单号重复下单                           |
 | ILLEGAL_ARGUMENT           | 参数错误              | 调用接口的参数错误 ;详见[参数错误提示详情](#参数错误提示详情)       |
 | ILLEGAL_CHANNEL_PARAMETERS | 支付渠道参数配置有误        |                                          |
 | CHANNEL_CHARGE_FAILED      | 向支付渠道下单失败         | Paymax向支付渠道下单时失败，会在failure_msg中显示失败原因    |
 | CHANNEL_FREEZE             | 该支付渠道已经被冻结交易      |                                          |
 | CHANNEL_REFUND_FAILED      | 向支付渠道申请退款失败       | Paymax向支付渠道退款时失败，会在failure_msg中显示失败原因    |
 | OUT_OF_DOWNLOAD            | 下载次数超限            | 对于对账单的下载，Paymax有一些约定的配置，在一定的时间内，调用接口不能超过规定次数 |
-| SYSTEM_ERROR               | 系统内部错误            | 由于某些原因造成系统处理异常，请联系Paymax处理               |
+| SYSTEM_ERROR               | 交易异常，请联系技术支持 | 由于某些原因造成交易处理异常，请联系Paymax处理           |
 
 ###	参数错误提示详情
 **发起支付（下单）公共参数错误提示**
