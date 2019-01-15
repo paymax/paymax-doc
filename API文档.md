@@ -29,7 +29,7 @@
 * [关于退款的说明](#%E5%85%B3%E4%BA%8E%E9%80%80%E6%AC%BE%E7%9A%84%E8%AF%B4%E6%98%8E)
 * [响应错误码](#%E5%93%8D%E5%BA%94%E9%94%99%E8%AF%AF%E7%A0%81)
     * [参数错误提示详情](#%E5%8F%82%E6%95%B0%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA%E8%AF%A6%E6%83%85)
-
+* [注意事项](#注意事项1)
 ## 签名和验签
 
 1. https传输协议
@@ -211,6 +211,8 @@ sign: Lp6TovxVq1r+qgai/B7M7ovV8NDsncZ6j6GfFUlR6QGVPtvpqkliS2kgo/mfm6AgFqpVy+edOG
 
 使用HTTP协议调用支付接口发起请求：
 
+<font color='red'>注意:同步响应结果为订单不存在时，需明确失败后再发起重汇</font>
+
 
 ```http
 POST /v1/charges HTTP/1.1
@@ -247,6 +249,8 @@ Charge对象
 
 
 ### 查询支付
+
+<font color='red'>注意:通过查询接口获取交易终态时，建议在交易请求获取到同步响应结果后再发起查询</font>
 
 ```http
 GET /v1/charges/{CHARGE_ID} HTTP/1.1
@@ -313,6 +317,8 @@ sign: {填入签名结果}
 Refund对象
 
 ### 查询退款
+
+<font color='red'>注意:通过查询接口获取交易终态时，建议在交易请求获取到同步响应结果后再发起查询</font>
 
 ```http
 GET /v1/charges/{CHARGE_ID}/refunds/{REFUND_ID} HTTP/1.1
@@ -631,3 +637,5 @@ open_id：必填，用户在公众号下的唯一标识
 | 拉卡拉 H5 支付    | return_url | 为空   | 缺少附加参数return_url |
 | 拉卡拉 H5 支付    | show_url   | 为空   | 缺少附加参数show_url   |
 
+## <span id='注意事项1'>注意事项</span>
+<font color='red'>注：本DEMO或文档中所示的默认配置参数仅供参考，接入方须视各自系统及交易情况进行相应的调整。如因采用默认配置参数导致交易异常及造成相关损失的，我司不承担相关责任。</font>
