@@ -7,6 +7,7 @@
 * [支付](#%E6%94%AF%E4%BB%98)
     * [发起支付（下单）](#%E5%8F%91%E8%B5%B7%E6%94%AF%E4%BB%98%E4%B8%8B%E5%8D%95)
     * [查询支付](#%E6%9F%A5%E8%AF%A2%E6%94%AF%E4%BB%98)
+    * [关单](#%e5%85%b3%e5%8d%95)
 * [退款](#%E9%80%80%E6%AC%BE)
     * [发起退款](#%E5%8F%91%E8%B5%B7%E9%80%80%E6%AC%BE)
     * [查询退款](#%E6%9F%A5%E8%AF%A2%E9%80%80%E6%AC%BE)
@@ -265,6 +266,28 @@ sign: {填入签名结果}
 返回：
 
 Charge对象
+
+### 关单
+
+```http
+GET /v1/charges/{CHARGE_ID}/close HTTP/1.1
+Host: https://www.paymax.cc/merchant-api
+ContentType: application/json;charset=utf-8
+Authorization: {填入Secret Key}
+nonce: {填入nonce随机字符串}
+timestamp: {填入timestamp}
+sign: {填入签名结果}
+```
+
+返回：
+
+| 参数         | 类型   | 描述                                                    |
+| ------------ | ------ | ------------------------------------------------------- |
+| status       | String | 关单状态，只有两种（SUCCEED-关单成功，FAILED-关单失败） |
+| failure_code | String | 错误码，详见[响应错误码](#响应错误码)                   |
+| failure_msg  | String | 错误消息的描述，详见[响应错误码](#响应错误码)           |
+
+
 
 
 ## 退款
@@ -550,8 +573,6 @@ open_id：必填，用户在公众号下的唯一标识
 
 
 
-
-
 ## 响应错误码
 
 当调用API接口失败时，会返回一个json对象，标明失败的原因和具体描述。
@@ -593,6 +614,17 @@ open_id：必填，用户在公众号下的唯一标识
 | CHANNEL_REFUND_FAILED      | 向支付渠道申请退款失败       | Paymax向支付渠道退款时失败，会在failure_msg中显示失败原因    |
 | OUT_OF_DOWNLOAD            | 下载次数超限            | 对于对账单的下载，Paymax有一些约定的配置，在一定的时间内，调用接口不能超过规定次数 |
 | SYSTEM_ERROR               | 交易异常，请联系技术支持 | 由于某些原因造成交易处理异常，请联系Paymax处理           |
+| CHANNEL_REQUEST_FAILED | 请求通道失败 |  |
+| CHANNEL_SYSTEM_FAILURE | 系统故障 | 支付渠道返回的错误描述 |
+| CHANNEL_SERVICE_UNAVAILABLE | Service Currently Unavailable | 支付渠道返回的错误描述 |
+| CHANNEL_PARTNER_NOT_EXIST | 合作机构信息不存在 | 支付渠道返回的错误描述 |
+| CHANNEL_LIMIT_EXCEEDED | 超限额 | 支付渠道返回的错误描述 |
+| CHANNEL_TERMINAL_NOT_EXIST | 商终参数信息不存在 | 支付渠道返回的错误描述 |
+| CHANNEL_NONACCEPTANCE | 不承兑 | 支付渠道返回的错误描述 |
+| CHANNEL_AUTHORITY_FREEZE | 服务商该产品权限已被冻结，请前往商户平台>产品中心检查后重试 | 支付渠道返回的错误描述 |
+| CHANNEL_SUPPLEMENTARY_INFORMATION | 当前商户需补齐相关资料后，才可进行相应的支付交易，请商户联系对接的微信支付服务商 | 支付渠道返回的错误描述 |
+| CHANNEL_CHARGE_CLOSE_FAILED | 通道关单失败 | Paymax向支付渠道关单失败，会在failure_msg中显示此失败原因 |
+| TRADE_HAS_FINAL_STATUS | 订单已经是终态 | 如果订单已经是终态，则不会再修改状态，也不能关单 |
 
 ###	参数错误提示详情
 **发起支付（下单）公共参数错误提示**
